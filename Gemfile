@@ -37,6 +37,9 @@ gem "bootsnap", require: false
 # User authentication [https://github.com/heartcombo/devise#starting-with-rails]
 gem 'devise'
 
+gem 'bootstrap', '~> 5.2.2'
+gem "font-awesome-sass", "~> 6.1.2"
+
 group :development, :test do
   gem "rspec-rails"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

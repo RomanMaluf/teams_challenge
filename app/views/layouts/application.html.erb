@@ -10,7 +10,24 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body id='body'>
+    <%= render 'layouts/default/header'%>
+    <div id="wrapper" class="container-fluid">
+      <div class="row">
+        <aside id="sidebar" class="col-12 col-lg-3 col-xl-2 sidebar position-fixed d-flex justify-content-between flex-column px-0">
+          <%= render partial: 'layouts/default/sidebar' %>
+          <%= render partial: 'layouts/default/version' %>
+        </aside>
+        <main id="main" class="col-12 col-lg-9 col-xl-10 offset-lg-3 offset-xl-2 main pt-2">
+          <div class="px-lg-4 px-md-2 px-2">
+            <div class="row">
+              <div class="col-12 px-0'" id="content">
+                <%= yield %>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
   </body>
 </html>
