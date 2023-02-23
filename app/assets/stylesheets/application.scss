@@ -1,31 +1,8 @@
 @import 'bootstrap';
 @import "font-awesome";
 
- @import 'components/header';
- @import 'components/sidebar';
+@import 'components/alert';
+@import 'components/header';
+@import 'components/sidebar';
 
-
-body {
-  font-family: "Open Sans", sans-serif;
-  background: #f6f9ff;
-  color: #444444;
-}
-
-#main {
-  margin-top: 60px;
-  padding: 20px 30px;
-  transition: all 0.3s;
-}
-
-@media (max-width: 1199px) {
-  #main {
-    padding: 20px;
-  }
-}
-
-@media (min-width: 1200px) {
-
-  #main{
-    margin-left: 300px;
-  }
-}
+@import 'custom'
