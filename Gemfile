@@ -36,6 +36,7 @@ gem "bootsnap", require: false
 
 # User authentication [https://github.com/heartcombo/devise#starting-with-rails]
 gem 'devise'
+gem 'pundit'
 
 gem 'bootstrap', '~> 5.2.2'
 gem "font-awesome-sass", "~> 6.1.2"
