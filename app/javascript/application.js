@@ -2,15 +2,3 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "bootstrap"
-import { on } from "custom/utilities" 
-
-document.addEventListener('DOMContentLoaded', () => {
-  const toggleButton =  () => {
-    if (document.getElementById('body').classList.contains('toggle-sidebar')) {
-      document.getElementById('body').classList.remove('toggle-sidebar')
-    }else{
-      document.getElementById('body').classList.add('toggle-sidebar')
-    }
-  }
-  on('click', '.toggle-sidebar-btn', toggleButton)
-},{ once: true });
