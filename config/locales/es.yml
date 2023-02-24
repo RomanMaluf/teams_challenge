@@ -1,0 +1,12 @@
+
+es:
+  # PUNDIT
+  pundit:
+    default: 'No puedes ejecutar esta acción'
+    update?: 'No tiene permitida la edición del ítem de %{model} seleccionado.'
+    create?: 'No tiene permitida la creación de %{model}.'
+    edit?: 'No tiene permitida la edición del ítem de %{model} seleccionado.'
+    new?: 'No tiene permitida la creación de %{model}.'
+    index?: 'No tiene permitida la visualización de %{model}.'
+    show?: 'No tiene permitida la visualización del ítem de %{model} seleccionado.'
+    destroy?: 'No tiene permitida la eliminación del ítem de %{model} seleccionado.'
