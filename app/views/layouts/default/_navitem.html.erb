@@ -1,1 +1,10 @@
-<%=link_to('Link', '', {})%>
+<li class='sidebar-menu-item d-block w-100 position-relative'>
+  <%= link_to( url, class: 'nav-link collapsed', width: 18, height: 18 ) do %>
+    <span class="mr-2">
+      <%= icon(icon_type, icon)%>
+    </span>
+    <span >
+      <%= text%>
+    </span>
+  <%end%>
+</li>
