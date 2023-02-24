@@ -40,6 +40,7 @@ gem 'pundit'
 
 gem 'bootstrap', '~> 5.2.2'
 gem "font-awesome-sass", "~> 6.1.2"
+gem 'jquery-rails'
 
 group :development, :test do
   gem "rspec-rails"
