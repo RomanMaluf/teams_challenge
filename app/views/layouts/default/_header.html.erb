@@ -4,19 +4,11 @@
       <span class="d-none d-lg-block">TeamsChallenge</span>
     <%end%>
     <%= icon('fa-solid', 'bars toggle-sidebar-btn',  'data-controller': "toggle" )%>
-    <div class="col text-right p-0">
-      <% if current_user %>
-        <%= link_to( destroy_user_session_path, method: :delete, class: 'd-flex align-items-center' )do %>
-          <span class="d-none d-lg-block"><%= t('sign_out')%></span>
-          <%= icon('fa-solid', 'sign-out')%>
-        <%end%>
-        <%= link_to( user_path(current_user), class: 'd-flex align-items-center' )do %>
-          <span class="d-none d-lg-block"><%= current_user.email %></span>
-        <%= icon('fa-solid', 'user')%>
-        <%end%>
-      <% else %>
-        Not logged User
-      <% end %>
-    </div>
+  </nav>
+
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+      <%= render partial: 'layouts/default/account_header' %>
+    </ul>
   </nav>
 </header>

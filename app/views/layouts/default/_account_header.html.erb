@@ -1,0 +1,33 @@
+<% if current_user %>
+  <li class="nav-item dropdown pe-3">
+    <%= link_to( '#', 'data-bs-toggle': 'dropdown', class: '"nav-link nav-profile d-flex align-items-center pe-0' )do %>
+      <%= icon('fa-solid', 'user nav-icon d-lg-block d-md-block ps-2')%>
+      <span class="dropdown-toggle"></span>
+    <%end%>
+    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+      <li class="dropdown-header">
+        <span><%= current_user.email%></span>
+      </li>
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+      <li class="dropdown-item p-0">
+        <%= link_to edit_user_path(current_user), class: 'dropdown-item d-flex align-items-center' do %>
+          <%= icon('fa-solid', 'user-pen')%>
+          &nbsp;
+          <%= t(:go_to_account) %>
+        <% end %>
+      </li>
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+      <li>
+        <%= link_to destroy_user_session_path, method: :delete, class: 'dropdown-item d-flex align-items-center' do %>
+          <%= icon('fa-solid', 'arrow-right-to-bracket')%>
+          &nbsp;
+          <%= t(:sign_out) %>
+        <% end %>
+      </li>
+    </ul>
+  </li>
+<% end %>
