@@ -1,0 +1,22 @@
+<% content_for :page_title do %>
+  <nav>
+    <ol class="breadcrumb admin">
+      <li class="breadcrumb-item active">
+      <%= icon('fa-solid', 'user')%>
+      <%= link_to t('users.list'), users_url%>
+      </li>
+    </ol>
+  </nav>
+<% end %>
+
+<div>
+  <% if policy(@user).edit? %> 
+    <%= link_to "Edit this user", edit_user_path(@user) %>
+  <% end %>
+  <% if policy(@user).destroy? %> 
+    <%= button_to "Destroy this user", @user, method: :delete %>
+  <%end%>
+</div>
+
+<%= render @user %>
+

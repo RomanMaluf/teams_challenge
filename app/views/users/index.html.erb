@@ -1,0 +1,20 @@
+<% content_for :page_title do %>
+  <nav>
+    <ol class="breadcrumb admin">
+      <li class="breadcrumb-item active">
+      <%= icon('fa-solid', 'user')%>
+      <%= link_to t('users.list'), users_url%>
+      </li>
+    </ol>
+  </nav>
+<% end %>
+<div id="users">
+  <% @users.each do |user| %>
+    <%= render user %>
+    <p>
+      <%= link_to "Show this user", user %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New user", new_user_path %>

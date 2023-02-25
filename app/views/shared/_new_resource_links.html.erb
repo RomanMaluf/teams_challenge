@@ -1,0 +1,12 @@
+<div class="form-actions" data-hook="buttons">
+  <%= f.submit t('actions.create'), {class: 'btn btn-success', data: { disable_with: "#{ t(:saving) }..." }} %>
+    <% if policy(resource).index? %> 
+      <span class="or"><%= t(:or) %></span>
+      <%= link_to collection_url, class: 'btn btn-danger' do %>
+        <span>
+          <%= t('actions.cancel')%>
+        </span>
+        <%= icon('fa-solid', 'trash')%>
+      <% end %>
+    <% end %>
+</div>

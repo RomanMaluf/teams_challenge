@@ -1,5 +1,20 @@
 
 en:
+  # Buttom Actions
+  actions:
+    update: Update
+    cancel: Cancel
+    create: Create
+  or: OR
+  saving: Saving
+  sign_out: Log Out
+  go_to_account: Go to edit account
+  # Navigation
+  users:
+    form_title: User
+    list: Users List
+    leave_password_blank: leave blank if you don't want to change it
+  errors_prohibited_this_record_from_being_saved: '%{count} Errors prohibited this %{model} from being saved'
   # PUNDIT
   pundit:
     default: 'You cannot perform this action.'

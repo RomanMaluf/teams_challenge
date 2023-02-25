@@ -10,9 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_16_010904) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_24_233224) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "permissions", force: :cascade do |t|
+    t.string "name"
+    t.string "resource"
+    t.string "action"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_permissions_on_name", unique: true
+  end
+
+  create_table "permissions_profiles", id: false, force: :cascade do |t|
+    t.bigint "profile_id"
+    t.bigint "permission_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["permission_id"], name: "index_permissions_profiles_on_permission_id"
+    t.index ["profile_id", "permission_id"], name: "tn_perfil_permiso", unique: true
+    t.index ["profile_id"], name: "index_permissions_profiles_on_profile_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_profiles_on_name", unique: true
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.bigint "profile_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_roles_on_profile_id"
+    t.index ["user_id", "profile_id"], name: "index_roles_on_user_id_and_profile_id", unique: true
+    t.index ["user_id"], name: "index_roles_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -20,6 +56,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_010904) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "english_level"
+    t.text "technical_knowledge"
+    t.string "cv_link"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

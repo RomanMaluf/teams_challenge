@@ -1,0 +1,43 @@
+<% content_for :page_title do %>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= icon('fa-solid', 'lock')%>
+      </li>
+    </ol>
+  </nav>
+<% end %>
+
+<div class="card mb-3">
+  <div class="card-header">
+    <h1 class="text-center card-title mb-0 h5">
+      Login
+    </h1>
+  </div>
+
+  <div class="card-body">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="row">
+        <div class="col-12 col-md-6 d-flex align-items-center">
+          <%= icon('far', 'user p-2')%>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'Email', class: 'form-control' %>
+        </div>
+        <div class="col-12 col-md-6 d-flex align-items-center">
+          <%= icon('fas', 'lock p-2')%>
+          <%= f.password_field :password, autocomplete: "current-password", placeholder: 'Password', class: 'form-control' %>
+        </div>
+        <div class="d-sm-flex align-items-sm-center justify-content-sm-between">
+          <% if devise_mapping.rememberable? %>
+            <div class="d-flex align-items-center">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me, class: 'text-light-white' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="my-3">
+        <%= f.submit "Login", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-12 col-md-6">
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="form-group">
+      <%= f.label :technical_knowledge %>
+      <%= f.text_area :technical_knowledge, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="form-group">
+      <%= f.label :english_level %>
+      <%= f.text_field :english_level, class: 'form-control' %>
+    </div>
+  </div>  
+  <div class="col-12 col-md-6">
+    <div class="form-group">
+      <%= f.label :cv_link %>
+      <%= f.text_field :cv_link, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="form-group">
+      <%= f.label :password %>
+      <small>*<%= t("users.leave_password_blank") %></small>
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="form-group">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+  </div>
+</div>

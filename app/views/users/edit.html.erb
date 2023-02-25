@@ -1,0 +1,35 @@
+<% content_for :page_title do %>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= icon('fa-solid', 'user')%>
+        <%= link_to t('users.list'), users_url%>
+      </li>
+      <li class="breadcrumb-item active">
+        <%= link_to @user.email, user_url(@user) %>
+      </li>
+    </ol>
+  </nav>
+<% end %>
+
+<div class="card mb-3">
+  <div class="card-header">
+    <h1 class="card-title mb-0 h5">
+      <%= t('users.form_title') %>
+    </h1>
+  </div>
+
+  <div class="card-body">
+    <div>
+      <%= render partial: 'shared/error_messages', locals: { target: @user } %>
+    </div>
+    <div>
+      <%= form_with(model: @user) do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+        <div>
+          <%= render partial: 'shared/edit_resource_links', locals: { f: f, collection_url: users_url, resource: User } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
