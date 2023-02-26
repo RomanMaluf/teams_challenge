@@ -23,6 +23,10 @@ class User < ApplicationRecord
     permissions.per_action_resource(action, resource).exists?
   end
 
+  def roles_name
+    roles.map(&:name) * '-'
+  end
+
   def admin?
     roles.map(&:name).include? 'SuperAdmin'
   end

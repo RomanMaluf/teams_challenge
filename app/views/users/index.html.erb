@@ -10,7 +10,12 @@
 <% end %>
 <div id="users">
   <% @users.each do |user| %>
-    <%= render user %>
+    <table class="table">
+      <tr>
+        <td> <%= user.email %> </td>
+        <td> <%= user.roles_name %> </td>
+      </tr>
+    </table>
     <p>
       <%= link_to "Show this user", user %>
     </p>

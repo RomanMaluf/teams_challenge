@@ -5,7 +5,7 @@
         <%= icon('fa-solid', 'user')%>
         <%= link_to t('users.list'), users_url%>
       </li>
-      <li class="breadcrumb-item active">
+      <li class="breadcrumb-item active" id=<%= dom_id @user%> >
         <%= link_to @user.email, user_url(@user) %>
       </li>
     </ol>
