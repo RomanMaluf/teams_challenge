@@ -9,14 +9,24 @@
   </nav>
 <% end %>
 
-<div>
-  <% if policy(@user).edit? %> 
-    <%= link_to "Edit this user", edit_user_path(@user) %>
-  <% end %>
-  <% if policy(@user).destroy? %> 
-    <%= button_to "Destroy this user", @user, method: :delete %>
-  <%end%>
+<div class="row">
+  <div class="col-6 col-md-4">
+    <% if policy(@user).edit? %> 
+      <%= link_to "Edit this user", edit_user_path(@user), class: 'btn btn-success' %>
+    <% end %>
+  </div>
+  <div class="col-6 col-md-4">
+    <% if policy(@user).destroy? %> 
+      <%= button_to "Destroy this user", @user, method: :delete, class: 'btn btn-danger', form: {data: {turbo_confirm: t('actions.confirm_deletion', model: User)}}  %>
+    <%end%>
+  </div>
+
 </div>
 
 <%= render @user %>
 
+
+
+<% if policy(:customer_account).index? %> 
+  <%= render 'customer_accounts' %>
+<% end %>

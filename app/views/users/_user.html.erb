@@ -1,25 +1,36 @@
 <div id="<%= dom_id user %>">
-<table class="table table-striped">
-  <tr>
-    <td><%= label(:user,:email) %></td>
-    <td><%= @user.email %></td>
-  </tr>
-  <tr>
-    <td><%= label(:user,:name) %></td>
-    <td><%= @user.name %></td>
-  </tr>
-  <tr>
-    <td><%= label(:user,:cv_link)%></td>
-    <td><%= @user.cv_link %></td>
-  </tr>
-  <tr>
-    <td><%= label(:user,:english_level) %></td>
-    <td><%= @user.english_level %></td>
-  </tr>
-  <tr>
-    <td><%= label(:user,:technical_knowledge)%></td>
-    <td><%= @user.technical_knowledge %></td>
-  </tr>
-</table>
+  <div class="card mb-3">
+
+    <div class="card-header">
+      <h1 class="card-title mb-0 h5">
+        <%= t('users.show_title') %>
+      </h1>
+    </div>
+  
+    <div class="card-body full_filled">
+      <table class="table table-bordered table-striped">
+        <tr>
+          <td><%= label(:user,:email) %></td>
+          <td><%= @user.email %></td>
+        </tr>
+        <tr>
+          <td><%= label(:user,:name) %></td>
+          <td><%= @user.name %></td>
+        </tr>
+        <tr>
+          <td><%= label(:user,:cv_link)%></td>
+          <td><%= @user.cv_link %></td>
+        </tr>
+        <tr>
+          <td><%= label(:user,:english_level) %></td>
+          <td><%= @user.english_level %></td>
+        </tr>
+        <tr>
+          <td><%= label(:user,:technical_knowledge)%></td>
+          <td><%= @user.technical_knowledge %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
 </div>

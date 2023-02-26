@@ -1,0 +1,27 @@
+<div id="<%= dom_id @user %>_customer_accounts">
+  <div class="card mb-3">
+
+    <div class="card-header">
+      <h1 class="card-title mb-0 h5">
+        <%= t('users.active_accounts') %>
+      </h1>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <th> <%= t('customer_accounts.name') %> </th>
+          <th> <%= t('customer_accounts.start_date') %> </th>
+          <th> <%= t('customer_accounts.end_date') %> </th>
+        </thead>
+        <tbody>
+        <% @user.active_accounts.each do |team| %>
+            <tr>
+              <td> <%= link_to team.name, team.customer_account %> </td>
+              <td> <%= team.start_date %> </td>
+              <td> <%= team.end_date %> </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+</div>

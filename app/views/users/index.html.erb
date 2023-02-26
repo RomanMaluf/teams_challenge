@@ -9,17 +9,21 @@
   </nav>
 <% end %>
 <div id="users">
-  <% @users.each do |user| %>
-    <table class="table">
-      <tr>
-        <td> <%= user.email %> </td>
-        <td> <%= user.roles_name %> </td>
-      </tr>
-    </table>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
+  <table class="table">
+    <thead>
+      <th> <%= t('user.email') %> </th>
+      <th> <%= t('user.active_accounts') %> </th>
+    </thead>
+    <tbody>
+    <% @users.each do |user| %>
+        <tr>
+          <td> <%= link_to user.email, user %> </td>
+          <td> <%= user.active_accounts.count %> </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
 </div>
 
 <%= link_to "New user", new_user_path %>
