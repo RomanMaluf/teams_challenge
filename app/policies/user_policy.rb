@@ -14,6 +14,13 @@ class UserPolicy < ApplicationPolicy
     itself || (super && within_scope?(record.id))
   end
 
+  # Avoid, Admin and SuperAdmins, destroy itself
+  def destroy?
+    return false if itself
+
+    (super && within_scope?(record.id))
+  end
+
   def scope
     Pundit.policy_scope!(user_context, record)
   end
