@@ -1,19 +1,45 @@
 
 en:
+  # ACTIVE RECORD ATTRIBUTES
+  activerecord:
+    attributes:
+      team:
+        name: 'Account Name'
+        customer: 'Customer Name'
+        manager: 'Operation Manager'
+        user_ids: 'Team Users'
+    errors:
+      models:
+        customer_account:
+          attributes:
+            users:
+              at_least_one: 'You should add at least one user to account team'
   # Buttom Actions
   actions:
     update: Update
     cancel: Cancel
     create: Create
+    confirm_deletion: Are you sure to delete this %{model} ?
   or: OR
   saving: Saving
   sign_out: Log Out
   go_to_account: Go to edit account
   # Navigation
+  profiles:
+    list: "Profiles List"
+    form_title: Profile
+  profile:
+    name: "Profile name"
   users:
+    active_accounts: Active accounts
+    email: Email
     form_title: User
     list: Users List
     leave_password_blank: leave blank if you don't want to change it
+    show_title: User Info
+  customer_accounts:
+    form_title: Account
+    list: Customer Account List
   errors_prohibited_this_record_from_being_saved: '%{count} Errors prohibited this %{model} from being saved'
   # PUNDIT
   pundit:

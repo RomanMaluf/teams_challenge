@@ -24,4 +24,15 @@
     </ul>
   <% end %>
 
+  <% if policy(:customer_account).index? %>
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <%= render partial: 'layouts/default/navitem', locals: {
+        url: customer_accounts_path,
+        icon_type: 'fa-solid',
+        icon: 'briefcase',
+        text: t('customer_acounts.list')
+      } %>
+    </ul>
+  <% end %>
+
 </nav>

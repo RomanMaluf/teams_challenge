@@ -1,0 +1,40 @@
+<% content_for :page_title do %>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active">
+      <%= icon('fa-solid', 'briefcase')%>
+      <%= link_to t('customer_accounts.list'), customer_accounts_path%>
+      </li>
+    </ol>
+    <% content_for :page_actions do %>
+      <%= link_to new_customer_account_path, class: "btn btn-success", id: 'new_customer_account_link' do %>
+        <%= icon('fa-solid', 'plus')%>
+        <span> <%= t('customer_account.new') %> </span>
+      <% end %>
+    <% end if policy(:customer_account).create? %>
+  </nav>
+<% end %>
+<div id="customer_accounts_list">
+  <table class="table">
+    <thead>
+      <th> Account Name</th>
+      <th> Customer Name </th>
+      <th> Operation Manager</th>
+      <th> Team Users Size </th>
+    </thead>
+    <tbody>
+      <% @customer_accounts.each do |account| %>
+            <tr>
+              <td> 
+                <%= link_to account.name, edit_customer_account_path(account) %> 
+              </td>
+              <td> <%= account.customer %> </td>
+              <td> <%= account.manager %> </td>
+              <td> <%= account.users.try(:count) %> </td>
+            </tr>
+
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
