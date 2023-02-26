@@ -6,7 +6,7 @@ class CreateRolAndPermissionsSchema < ActiveRecord::Migration[7.0]
       t.string :name
       t.string :resource
       t.string :action
-  
+
       t.timestamps
     end
 
@@ -22,7 +22,7 @@ class CreateRolAndPermissionsSchema < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-  
+
     create_table :roles do |t|
       t.belongs_to :profile
       t.belongs_to :user

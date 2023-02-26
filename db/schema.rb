@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_24_233224) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_26_031555) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "customer_accounts", force: :cascade do |t|
+    t.string "name"
+    t.string "customer"
+    t.string "manager"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "permissions", force: :cascade do |t|
     t.string "name"
@@ -48,6 +56,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_233224) do
     t.index ["profile_id"], name: "index_roles_on_profile_id"
     t.index ["user_id", "profile_id"], name: "index_roles_on_user_id_and_profile_id", unique: true
     t.index ["user_id"], name: "index_roles_on_user_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.bigint "customer_account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_account_id"], name: "index_teams_on_customer_account_id"
+  end
+
+  create_table "teams_users", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "team_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_teams_users_on_team_id"
+    t.index ["user_id"], name: "index_teams_users_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

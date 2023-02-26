@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SeedPermissionsForUser < ActiveRecord::Migration[7.0]
   class Profile < ActiveRecord::Base
     has_and_belongs_to_many :permissions
@@ -17,8 +19,8 @@ class SeedPermissionsForUser < ActiveRecord::Migration[7.0]
       next if Permission.where(resource: resource, action: idx).exists?
 
       nuevo = Permission.create name: "#{acc.to_s.titleize} #{resource.titleize}",
-        resource: resource,
-        action: idx
+                                resource: resource,
+                                action: idx
 
       puts " * creado: #{nuevo.to_json}"
     end
@@ -40,11 +42,10 @@ class SeedPermissionsForUser < ActiveRecord::Migration[7.0]
       puts "  * #{resource}:"
       puts "    #{Permission.find(new_permissions).map(&:name) * ', '}"
     end
-
-    
   end
 
   private
+
   def actions
     {
       register: 'register',
