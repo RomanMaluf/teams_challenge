@@ -25,6 +25,7 @@
             <%= render partial: 'layouts/default/content_header' %>
             <div class="row">
               <div class="col-12 px-0'" id="content">
+                <%= render partial: 'layouts/default/table_filter' if content_for?(:table_filter)%>
                 <%= render partial: 'layouts/default/alert' %>
                 <%= yield %>
               </div>

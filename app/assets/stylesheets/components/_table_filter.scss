@@ -1,0 +1,57 @@
+#table-filter {
+  display: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-top: 20px;
+}
+
+.index-filter-button {
+  font-size: $font-size-sm;
+  .icon {
+    color: $gray-800;
+  }
+
+  button {
+    height: 100%;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    font-size: $small-font-size;
+    border-color: $input-border-color;
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: $white;
+
+    &:hover, &:focus {
+      background-color: $blue-100;
+    }
+  }
+
+  .js-quick-search {
+    font-size: $font-size-sm;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.table-active-filters {
+  display: none;
+  margin: -.5em 0 .9em;
+
+  .badge {
+    display: inline-block;
+    margin-right: .5em;
+    margin-bottom: .5em;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    span.icon {
+      margin: .3em 0 0 .6em;
+      font-size: 80%;
+      cursor: pointer;
+    }
+  }
+}
