@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  include Swagger::UsersApi
+
   after_action :verify_authorized, if: :current_user
   before_action :set_user, only: %i[show edit update destroy]
 
   def index
-    @users = User.all
+    @users = policy_scope(User).all
     authorize User
   end
 
@@ -13,10 +15,13 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @user.roles.build if @user.roles.blank?
     authorize @user
   end
 
-  def edit; end
+  def edit
+    @user.roles.build if @user.roles.blank?
+  end
 
   def create
     @user = User.new(user_params)
@@ -67,6 +72,6 @@ class UsersController < ApplicationController
       params[:user].delete(:password_confirmation)
     end
     params.require(:user).permit(:email, :password, :password_confirmation, :name, :english_level, :cv_link,
-                                 :technical_knowledge)
+                                 :technical_knowledge, roles_attributes: [ :profile_id, :id, {} ])
   end
 end

@@ -9,7 +9,7 @@ class Role < ApplicationRecord
   belongs_to :profile
   belongs_to :user
 
-  delegate :name, to: :profile
+  delegate :name, to: :profile, allow_nil: true
 
   validates :profile,
             presence: true

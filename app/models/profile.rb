@@ -7,4 +7,9 @@ class Profile < ApplicationRecord
   validates :name,
             presence: true,
             uniqueness: true
+
+  scope :elegibles, -> (is_admin= false, names = ['SuperAdmin']) {
+    names << 'Admin' unless is_admin
+    where.not(name: names)
+  }
 end

@@ -21,21 +21,22 @@ class UserPolicy < ApplicationPolicy
     (super && within_scope?(record.id))
   end
 
-  def scope
-    Pundit.policy_scope!(user_context, record)
+  def roles?
+    can?(:register, 'Role')
   end
 
   class Scope < Scope
     def resolve
       return scope.none if user.blank? # just in case
 
-      out = User.all
-
-      return out if user.admin?
-
-      out = out.where(id: user.id) # Only User context profile
-
-      out
+      case user.roles_name
+      when 'SuperAdmin', 'SuperAdmin-Admin'
+        User.all
+      when 'Admin'
+        User.not_admins.or(User.where(id: user.id)) # hide other admin user for admin
+      else
+        User.where(id: user.id) # Only User context profile
+      end
     end
   end
 end

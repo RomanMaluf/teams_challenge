@@ -36,4 +36,20 @@
       <%= f.password_field :password_confirmation, class: 'form-control' %>
     </div>
   </div>
+
+  <% if( UserPolicy.new(current_user,User).roles? && !@user.admin?) && current_user != @user %>
+    <%= f.fields_for :roles do |role_form| %>
+      <%= role_form.hidden_field :id %>
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <%= role_form.label :profile_id, t('rol') %>
+            <%= role_form.select :profile_id, Profile.elegibles(current_user.admin?).collect { |x| [x.name, x.id]}, 
+                                          { include_blank: t('users.select_one_role') }, 'data-controller': 'select', 
+                                          class: 'form-control select2' %>
+          </div>
+        </div>      
+    <% end %>
+
+  <% end %>
 </div>
+

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CustomerAccountPolicy < ApplicationPolicy
+class TeamUserPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve

@@ -1,0 +1,29 @@
+<% content_for :page_title do %>
+  <nav>
+    <ol class="breadcrumb admin">
+      <li class="breadcrumb-item active">
+      <%= icon('fa-solid', 'lock')%>
+      <%= link_to t('profiles.list'), profiles_url%>
+      </li>
+    </ol>
+  </nav>
+<% end %>
+
+<% if @profiles.any? %>
+  <table class="table" id="listing_profiles">
+    <thead>
+      <tr>
+        <th>
+          <%= t('profile.name') %>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @profiles.each do |profile|%>
+        <tr id="<%= dom_id profile %>">
+          <td><%=link_to profile.name, edit_profile_url(profile) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

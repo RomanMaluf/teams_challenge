@@ -45,6 +45,10 @@ class ApplicationPolicy
       user.can_perform?(Permission.action_types[type], record)
   end
 
+  def scope
+    Pundit.policy_scope!(user_context, record)
+  end
+
   class Scope
     def initialize(user, scope)
       @user = user

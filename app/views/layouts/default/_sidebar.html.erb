@@ -2,7 +2,7 @@
   <div class="text-right d-lg-none pl-3 py-2 border-bottom d-flex align-items-center">
     <div class="d-flex flex-grow-1 text-primary"></div>
   </div>
-  <% if policy(:user).index? %>
+  <% if UserPolicy.new(current_user,User).index?  %>
     <ul class="sidebar-nav" id="sidebar-nav">
       <%= render partial: 'layouts/default/navitem', locals: {
         url: users_path,
@@ -13,7 +13,7 @@
     </ul>
   <% end %>
 
-  <% if policy(:profile).index? %>
+  <% if ProfilePolicy.new(current_user,Profile).index? %>
     <ul class="sidebar-nav" id="sidebar-nav">
       <%= render partial: 'layouts/default/navitem', locals: {
         url: profiles_path,
@@ -24,13 +24,24 @@
     </ul>
   <% end %>
 
-  <% if policy(:customer_account).index? %>
+  <% if CustomerAccountPolicy.new(current_user,CustomerAccount).index?  %>
     <ul class="sidebar-nav" id="sidebar-nav">
       <%= render partial: 'layouts/default/navitem', locals: {
         url: customer_accounts_path,
         icon_type: 'fa-solid',
         icon: 'briefcase',
-        text: t('customer_acounts.list')
+        text: t('customer_accounts.list')
+      } %>
+    </ul>
+  <% end %>
+
+  <% if TeamUserPolicy.new(current_user,TeamUser).index?  %>
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <%= render partial: 'layouts/default/navitem', locals: {
+        url: teams_users_path,
+        icon_type: 'fa-solid',
+        icon: 'briefcase',
+        text: t('teams_users.list')
       } %>
     </ul>
   <% end %>

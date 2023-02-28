@@ -1,0 +1,34 @@
+<% content_for :page_title do %>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= icon('fa-solid', 'lock')%>
+        <%= link_to t('profiles.list'), profiles_url%>
+      </li>
+      <li class="breadcrumb-item active">  <%= @profile.name.capitalize %> </li>
+    </ol>
+  </nav>
+<% end %>
+
+
+<div class="card mb-3">
+  <div class="card-header">
+    <h1 class="card-title mb-0 h5">
+      <%= t('profiles.form_title') %>
+    </h1>
+  </div>
+
+  <div class="card-body">
+    <div>
+      <%= render partial: 'shared/error_messages', locals: { target: @profile } %>
+    </div>
+    <div>
+      <%= form_for [@profile], url: profile_url(@profile), method: :put do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+        <div>
+          <%= render partial: 'shared/edit_resource_links', locals: { f: f,collection_url: profiles_url, resource: @profile } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

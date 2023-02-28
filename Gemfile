@@ -42,6 +42,10 @@ gem 'bootstrap', '~> 5.2.2'
 gem "font-awesome-sass", "~> 6.1.2"
 gem 'jquery-rails'
 
+gem 'ransack', :github => 'activerecord-hackery/ransack', :branch => 'main'
+
+gem 'swagger-blocks'
+
 group :development, :test do
   gem "rspec-rails"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

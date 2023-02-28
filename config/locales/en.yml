@@ -36,10 +36,20 @@ en:
     form_title: User
     list: Users List
     leave_password_blank: leave blank if you don't want to change it
+    select_one_role: You must select one Role
     show_title: User Info
+  rol: Role
   customer_accounts:
     form_title: Account
     list: Customer Account List
+  teams_users:
+    list: Team User List
+  quick_search: Search
+  filter: Filters
+  searches:
+    user_email: User Email
+    user_name: User Name
+    customer_account_name: Account Name
   errors_prohibited_this_record_from_being_saved: '%{count} Errors prohibited this %{model} from being saved'
   # PUNDIT
   pundit:

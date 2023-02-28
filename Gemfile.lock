@@ -1,3 +1,13 @@
+GIT
+  remote: https://github.com/activerecord-hackery/ransack.git
+  revision: dbffa8bed3e4cad9d7f51cd9233466ae4b68fb4d
+  branch: main
+  specs:
+    ransack (4.0.0)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -214,6 +224,7 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
+    swagger-blocks (3.0.0)
     thor (1.2.1)
     tilt (2.0.11)
     timeout (0.3.1)
@@ -251,9 +262,11 @@ DEPENDENCIES
   puma (~> 5.0)
   pundit
   rails (~> 7.0.4, >= 7.0.4.2)
+  ransack!
   rspec-rails
   sprockets-rails
   stimulus-rails
+  swagger-blocks
   turbo-rails
   tzinfo-data
   web-console

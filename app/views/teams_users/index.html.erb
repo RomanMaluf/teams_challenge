@@ -1,0 +1,52 @@
+<% content_for :table_filter do %>
+
+  <%= search_form_for @search, url: teams_users_path do |f| %>
+      <div class="row">
+        <div class="col-8 col-lg-3">
+          <div class="form-group">
+            <%= f.label :user_email_cont, t('searches.user_email') %>
+            <%= f.text_field :user_email_cont, class: "form-control js-quick-search-target js-filterable" %>
+          </div>
+        </div>
+        <div class="col-8 col-lg-3">
+          <div class="form-group">
+            <%= f.label :user_name_cont, t('searches.user_name') %>
+            <%= f.text_field :user_name_cont, class: "form-control js-filterable" %>
+          </div>
+        </div>
+        <div class="col-8 col-lg-3">
+          <div class="form-group">
+            <%= f.label :customer_account_name_cont, t('searches.customer_account_name') %>
+            <%= f.text_field :customer_account_name_cont, class: "form-control js-filterable" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <%= button_tag(t(:search), type: 'search', class: 'btn btn-success') %>
+      </div>
+  <% end  %>
+<%end %>
+<div class="card mb-3">
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <th> User </th>
+        <th> Account Name</th>
+        <th> Stars At </th>
+        <th> Ends At </th>
+        <th> Dropped Out </th>
+      </thead>
+      <tbody>
+        <% @teams_users.each do |team_user| %>
+          <tr>
+            <td><%=link_to team_user.email, user_path(team_user.user)%> </td>
+            <td><%=team_user.name%> </td>
+            <td><%=team_user.start_date.to_date%> </td>
+            <td><%=team_user.end_date.to_date%> </td>
+            <td><%=team_user.deleted_at.try(:to_date)%> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

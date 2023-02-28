@@ -13,6 +13,10 @@ class CustomerAccount < ApplicationRecord
 
   validate :at_least_one_user_team
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["name"]
+  end
+
   private
 
   def at_least_one_user_team

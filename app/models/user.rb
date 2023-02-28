@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :roles,
            dependent: :destroy,
            inverse_of: :user
+  accepts_nested_attributes_for :roles
   has_many :profiles,
            dependent: :destroy,
            through: :roles
@@ -17,6 +18,14 @@ class User < ApplicationRecord
   has_many :teams, through: :team_users
 
   has_many :customer_account, through: :teams
+
+  scope :not_admins, -> {
+    joins(:profiles).where.not(profiles: {name: ['SuperAdmin', 'Admin']})
+  }
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["email", "name"]
+  end
 
   def can_perform?(action, resource)
     condition = permission?(action, resource)

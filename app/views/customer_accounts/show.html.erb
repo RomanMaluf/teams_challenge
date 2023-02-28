@@ -1,0 +1,33 @@
+<% content_for :page_title do %>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= icon('fa-solid', 'briefcase')%>
+        <%= link_to t('customer_accounts.list'), customer_accounts_url%>
+      </li>
+      <li class="breadcrumb-item">
+        <%= t('customer_accounts.show') %>
+      </li>
+      <li class="breadcrumb-item active">
+        <%=@customer_account.name %>
+      </li>
+
+    </ol>
+  </nav>
+<% end %>
+
+<div class="card mb-3">
+  <div class="card-header">
+    <h1 class="card-title mb-0 h5">
+      <%= t('customer_accounts.form_title') %>
+    </h1>
+  </div>
+
+  <div class="card-body">
+    <div>
+    </div>
+    <div>
+
+    </div>
+  </div>
+</div>
