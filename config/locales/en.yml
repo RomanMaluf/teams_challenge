@@ -35,6 +35,7 @@ en:
     email: Email
     form_title: User
     list: Users List
+    new: New User
     leave_password_blank: leave blank if you don't want to change it
     select_one_role: You must select one Role
     show_title: User Info
