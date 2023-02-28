@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SeedPermissionsForUser < ActiveRecord::Migration[7.0]
+class SeedPermissionsForRoles < ActiveRecord::Migration[7.0]
   class Profile < ActiveRecord::Base
     has_and_belongs_to_many :permissions
   end
@@ -10,7 +10,7 @@ class SeedPermissionsForUser < ActiveRecord::Migration[7.0]
   end
 
   def up
-    resource = 'User'
+    resource = 'Role'
 
     Profile.reset_column_information
     Permission.reset_column_information
@@ -27,8 +27,7 @@ class SeedPermissionsForUser < ActiveRecord::Migration[7.0]
 
     # Add permissions to profiles
     profiles = [
-      'SuperAdmin',
-      'Admin'
+      'SuperAdmin'
     ]
 
     profiles.each do |profile|
@@ -42,9 +41,6 @@ class SeedPermissionsForUser < ActiveRecord::Migration[7.0]
       puts "  * #{resource}:"
       puts "    #{Permission.find(new_permissions).map(&:name) * ', '}"
     end
-
-    # Create User role, just in case
-    Profile.find_or_create_by! name: 'User'
   end
 
   private
