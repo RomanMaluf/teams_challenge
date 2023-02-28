@@ -50,6 +50,8 @@ en:
     user_email: User Email
     user_name: User Name
     customer_account_name: Account Name
+    team_users_start_date: Start Date
+    team_users_end_date: End Date
   errors_prohibited_this_record_from_being_saved: '%{count} Errors prohibited this %{model} from being saved'
   # PUNDIT
   pundit:

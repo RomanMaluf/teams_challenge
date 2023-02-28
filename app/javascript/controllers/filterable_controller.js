@@ -2,7 +2,6 @@ import {Controller} from "@hotwired/stimulus"
 
 export default class extends Controller {
   initialize() {
-    console.log(this.element)
     $(function () {
       $(".js-show-index-filters").click(function () {
         $(".filter-well").slideToggle();
@@ -66,7 +65,7 @@ export default class extends Controller {
             ransackFieldId +
             '">' +
             label +
-            '<span class="icon icon-delete js-delete-filter"></span></span>';
+            '&nbsp; <span class="fa-solid fa-delete-left js-delete-filter"></span></span>';
           $(".js-filters").append(filter).show();
         }
       });

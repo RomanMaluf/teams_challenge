@@ -1,31 +1,15 @@
-<% content_for :table_filter do %>
+<% content_for :page_title do %>
+  <nav>
+    <ol class="breadcrumb admin">
+      <li class="breadcrumb-item active">
+      <%= icon('fa-solid', 'briefcase')%>
+      <%= link_to t('teams_users.list'), teams_users_path%>
+      </li>
+    </ol>
+  </nav>
+<% end %>
 
-  <%= search_form_for @search, url: teams_users_path do |f| %>
-      <div class="row">
-        <div class="col-8 col-lg-3">
-          <div class="form-group">
-            <%= f.label :user_email_cont, t('searches.user_email') %>
-            <%= f.text_field :user_email_cont, class: "form-control js-quick-search-target js-filterable" %>
-          </div>
-        </div>
-        <div class="col-8 col-lg-3">
-          <div class="form-group">
-            <%= f.label :user_name_cont, t('searches.user_name') %>
-            <%= f.text_field :user_name_cont, class: "form-control js-filterable" %>
-          </div>
-        </div>
-        <div class="col-8 col-lg-3">
-          <div class="form-group">
-            <%= f.label :customer_account_name_cont, t('searches.customer_account_name') %>
-            <%= f.text_field :customer_account_name_cont, class: "form-control js-filterable" %>
-          </div>
-        </div>
-      </div>
-      <div class="form-actions">
-        <%= button_tag(t(:search), type: 'search', class: 'btn btn-success') %>
-      </div>
-  <% end  %>
-<%end %>
+<%= render 'filter_table' %>
 <div class="card mb-3">
   <div class="card-body">
     <table class="table">
