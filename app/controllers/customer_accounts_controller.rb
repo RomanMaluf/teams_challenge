@@ -59,7 +59,7 @@ class CustomerAccountsController < ApplicationController
 
   def customer_account_params
     params.require(:customer_account).permit(:name, :customer, :manager,
-                                             team_attributes: [:id, { team_users_attributes: {} }])
+                                             team_attributes: [:id, { team_users_attributes: [:id, :user_id, :start_date, :end_date, :_destroy] }])
   end
 
   def setup_new_team

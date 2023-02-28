@@ -53,7 +53,8 @@
               </div>
             </td>
             <td class="col-1 col-md-1 d-sm-flex align-items-sm-center justify-content-sm-between">
-              <%= icon('fa-solid', 'trash')%>
+              <%= team_user_form.hidden_field :_destroy, id: 'delete_member', 'data-controller': "deleteable" %>
+              <%= icon('fa-solid', 'trash delete_member btn btn-danger')%>
             </td>
           </tr>
         <% end %>
