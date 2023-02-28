@@ -8,6 +8,8 @@ This is a `Rails` project bootstrapped with `rails new teams_challenge -d postgr
 -----
 >using docker for the database and install rails locally
 
+> Personal Option: This is the best options, because render views with rails inside docker its a very slow process.
+So with the hybrid schema you could speed up your developments
 #### Rails
  From [`rvm`](https://rvm.io/) documentation
  ```bash
@@ -18,7 +20,16 @@ This is a `Rails` project bootstrapped with `rails new teams_challenge -d postgr
   rvm install 3.2.0
   # Third install rails gem and all the dependencies
   gem install rails 7.0.4.2
-
+  # 4. After docker-compose up
+  rails db:create && rails db:migrate
+  # Seed you can pass two arguments to seed user count and admin user password
+  # The admin user email is admin@arkusnexus.com
+  # For Example
+  ADMIN_PASSWORD=arkusnexus USERS_COUNT=75 rails db:seed
  ```
 #### Docker
-  Simply run ``` docker-compose up postgres ```
+  Simply run ``` docker-compose up postgres```
+
+### Swagger
+  To access swagger-ui
+  Run ``` docker-compose up swagger```, and go to localhost/swagger
