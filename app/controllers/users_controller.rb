@@ -8,7 +8,10 @@ class UsersController < ApplicationController
 
   def index
     @users = policy_scope(User).all
-    authorize User
+    authorize @users
+
+    @search = @users.ransack(params[:q])
+    @users = @search.result(distinct: true)
   end
 
   def show; end
