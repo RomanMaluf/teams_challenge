@@ -18,8 +18,8 @@ class CreateCustomerAccountAndTeams < ActiveRecord::Migration[7.0]
     create_table :teams_users do |t|
       t.belongs_to :user
       t.belongs_to :team
-      t.datetime   :start_date
-      t.datetime   :end_date
+      t.date   :start_date
+      t.date   :end_date
 
       t.datetime   :deleted_at
       t.timestamps

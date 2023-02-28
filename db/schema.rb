@@ -68,8 +68,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_140931) do
   create_table "teams_users", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "team_id"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.date "start_date"
+    t.date "end_date"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
