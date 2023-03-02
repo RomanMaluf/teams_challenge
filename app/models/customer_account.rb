@@ -12,7 +12,7 @@ class CustomerAccount < ApplicationRecord
             uniqueness: true
   validates_presence_of :manager, :customer
 
-  validate :at_least_one_user_team
+  before_save :at_least_one_user_team
 
   def self.ransackable_attributes(auth_object = nil)
     ["name"]
@@ -21,7 +21,7 @@ class CustomerAccount < ApplicationRecord
   private
 
   def at_least_one_user_team
-    return unless team&.team_users.blank?
+    return unless users.blank?
 
     errors.add :users, :at_least_one
   end
