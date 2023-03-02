@@ -33,17 +33,12 @@ const quickSearchFromTable = () => {
 const addFilterBadgeFromSearchFrom = ()=>{
   $(".js-filterable").each(function () {
     var $this = $(this);
-
     if ($this.val()) {
       var ransackValue, filter;
       var ransackFieldId = $this.attr("id");
       var label = $('label[for="' + ransackFieldId + '"]');
 
-      if ($this.is("select")) {
-        ransackValue = $this.find("option:selected").text();
-      } else {
-        ransackValue = $this.val();
-      }
+      ransackValue = ($this.is("select")) ? $this.find("option:selected").text() : $this.val();
 
       label = label.text() + ": " + ransackValue;
 
