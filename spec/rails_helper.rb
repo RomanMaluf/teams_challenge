@@ -30,10 +30,23 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
+require 'simplecov'
+
+SimpleCov.start do
+  add_group "Models", "app/models"
+  add_group "Controllers", "app/controllers"
+  add_group "Policies", "app/policies"
+  add_group "Views", "app/views"
+end
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include PunditSpecHelper, type: :view
+  config.include Devise::Test::ControllerHelpers, type: :view # For Warden error
+  config.include Devise::Test::IntegrationHelpers, type: :request   # For Sign_in method
+  config.include FactoryBot::Syntax::Methods
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
