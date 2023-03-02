@@ -58,7 +58,9 @@ group :development do
 end
 
 group :test do
-  gem 'simplecov', require: false, group: :test
+  gem 'database_cleaner-active_record'
+  gem 'simplecov', require: false
   gem "factory_bot_rails"
   gem 'ffaker'
+  gem 'shoulda-matchers'
 end
