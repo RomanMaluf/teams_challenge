@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 FactoryBot.define do
   factory :profile, class: 'Profile' do
     sequence(:name)   { |n| "User ##{n} - #{Kernel.rand(9999)}" }
