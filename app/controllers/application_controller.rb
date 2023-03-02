@@ -6,6 +6,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
 
+  before_action :add_cors_headers
+
+  # To avoid swagger missing cors error.
+  # TODO: add logic to this method or add rack-cors gem
+  def add_cors_headers
+    headers['Access-Control-Allow-Origin'] = request.headers["Origin"] || '*'
+    headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, PUT, DELETE'
+  end
+
   def after_sign_in_path_for(resource)
     if resource.roles.include?('admin') || resource.roles.include?('superadmin')
       home_index_path
