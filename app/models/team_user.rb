@@ -6,7 +6,7 @@ class TeamUser < ApplicationRecord
   belongs_to :user
 
   has_one :customer_account, through: :team
-  delegate :name, to: :customer_account
+  delegate :name, :customer, :manager, to: :customer_account
   delegate :email, to: :user
 
   validates_presence_of :start_date, :end_date

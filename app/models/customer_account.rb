@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CustomerAccount < ApplicationRecord
+  include Swagger::CustomerAccountSchema
   has_one :team
   accepts_nested_attributes_for :team
 
