@@ -1,54 +1,56 @@
 # frozen_string_literal: true
 
+# frozen_string_literal: true
+
 module Swagger
-  module UsersApi
+  module CustomerAccountsApi
     extend ActiveSupport::Concern
     include Swagger::Blocks
 
     included do
-      swagger_path '/users/{id}' do
+      swagger_path '/customer_accounts/{id}' do
         parameter name: :id do
           key :in, :path
-          key :description, 'User ID'
+          key :description, 'Customer Account ID'
           key :required, true
           key :type, :integer
           key :format, :int64
         end
         operation :get do
-          key :description, 'Find a user by ID'
-          key :operationId, :find_user_by_id
-          key :tags, [:User]
+          key :description, 'Find a customer account by ID'
+          key :operationId, :find_customer_account_by_id
+          key :tags, [:CustomerAccount]
           security do
             key :api_key, []
           end
           response 200 do
-            key :description, 'User'
+            key :description, 'Customer account'
             schema do
-              key :'$ref', :User
+              key :'$ref', :CustomerAccount
             end
           end
         end
         operation :put do
-          key :description, 'Updates a User'
-          key :operationId, :update_user
+          key :description, 'Updates CustomerAccount'
+          key :operationId, :update_customer_account
           key :produces, ['application/json']
-          key :tags, [:User]
+          key :tags, [:CustomerAccount]
           security do
             key :api_key, []
           end
           parameter do
-            key :name, :user
+            key :name, :customer_account
             key :in, :body
-            key :description, 'User to update'
+            key :description, 'CustomerAccount to update'
             key :required, true
             schema do
-              key :'$ref', :UserInput
+              key :'$ref', :CustomerAccountInput
             end
           end
           response 200 do
-            key :description, 'user response'
+            key :description, 'customer account response'
             schema do
-              key :'$ref', :User
+              key :'$ref', :CustomerAccount
             end
           end
           response :default do
@@ -56,38 +58,37 @@ module Swagger
           end
         end
         operation :delete do
-          key :description, 'deletes a user based on the ID supplied'
-          key :operationId, :delete_user
-          key :tags, [:User]
+          key :description, 'deletes a customer_accounts based on the ID supplied'
+          key :operationId, :delete_customer_account
+          key :tags, [:CustomerAccount]
           security do
             key :api_key, []
           end
           response 204 do
-            key :description, 'user deleted'
+            key :description, 'account deleted'
           end
           response :default do
             key :description, 'unexpected error'
           end
         end
       end
-
-      swagger_path '/users' do
+      swagger_path '/customer_accounts' do
         operation :get do
-          key :description, 'get all the Users'
-          key :operationId, :get_all_users
+          key :description, 'get all the customer accounts'
+          key :operationId, :get_all_customer_accounts
           key :produces, [
             'application/json'
           ]
-          key :tags, [:User]
+          key :tags, [:CustomerAccount]
           security do
             key :api_key, []
           end
           response 200 do
-            key :description, 'user response'
+            key :description, 'customer_account response'
             schema do
               key :type, :array
               items do
-                key :'$ref', :User
+                key :'$ref', :CustomerAccount
               end
             end
           end
@@ -96,28 +97,28 @@ module Swagger
           end
         end
         operation :post do
-          key :description, 'Creates a new User'
-          key :operationId, :add_user
+          key :description, 'Creates a new Customer Account'
+          key :operationId, :add_customer_account
           key :produces, [
             'application/json'
           ]
-          key :tags, [:User]
+          key :tags, [:CustomerAccount]
           security do
             key :api_key, []
           end
           parameter do
-            key :name, :user
+            key :name, :customer_account
             key :in, :body
-            key :description, 'User to add'
+            key :description, 'Customer Account to add'
             key :required, true
             schema do
-              key :'$ref', :UserInput
+              key :'$ref', :CustomerAccountInput
             end
           end
           response 200 do
-            key :description, 'user response'
+            key :description, 'customer account response'
             schema do
-              key :'$ref', :User
+              key :'$ref', :CustomerAccount
             end
           end
           response :default do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProfilesController < ApplicationController
   after_action :verify_authorized, if: :current_user
   before_action :set_profile, only: %i[show edit update destroy]
