@@ -23,7 +23,7 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD
-      - image: circleci/postgres:13-alpine
+      - image: circleci/postgres
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD
