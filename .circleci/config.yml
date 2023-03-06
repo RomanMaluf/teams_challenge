@@ -1,20 +1,70 @@
-version: 2.1
+version: 2.1 # Use 2.1 to enable using orbs and other features.
+
+# Declare the orbs that we'll use in our config.
+# read more about orbs: https://circleci.com/docs/2.0/using-orbs/
 orbs:
-  ruby: circleci/ruby@1.4.0
+  ruby: circleci/ruby@1.8.0
+  node: circleci/node@5.0.3
 
 jobs:
-  build:
+  build: # our first job, named "build"
+    docker:
+      - image: cimg/ruby:3.2.0 # use a tailored CircleCI docker image.
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
+    steps:
+      - checkout # pull down our git code.
+      - ruby/install-deps # use the ruby orb to install dependencies
+  test:
+    parallelism: 1
     docker:
       - image: cimg/ruby:3.2.0
-    executor: ruby/default
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
+      - image: circleci/postgres:13-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
+        environment: # add POSTGRES environment variables.
+          POSTGRES_USER: circleci-demo-ruby
+          POSTGRES_DB: rails_blog_test
+          POSTGRES_PASSWORD: ""
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      PGHOST: 127.0.0.1
+      PGUSER: circleci
+      PGPASSWORD: ""
+      RAILS_ENV: test
+      DATABASE_USERNAME: circleci
+      DATABASE_PASSWORD: ""
+      DATABASE_TEST_NAME: teams_challenge_test
+      DATABASE_HOST: 127.0.0.1
     steps:
       - checkout
+      - ruby/install-deps
       - run:
-          name: Which bundler?
-          command: bundle -v
-      - ruby/bundle-install
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bundle exec rails db:create && bundle exec rails db:migrate && bundle exec rails db:prepare 
+      - run:
+          name: Run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
 
+            bundle exec rspec --format progress $TEST_FILES
+
+# We use workflows to orchestrate the jobs that we declared above.
 workflows:
-  build:
-    jobs:
-      - build
+  version: 2
+  build_and_test: # The name of our workflow is "build_and_test"
+    jobs: # The list of jobs we run as part of this workflow.
+      - build # Run build first.
+      - test: # Then run test,
+          requires: # Test requires that build passes for it to run.
+            - build # Finally, run the build job.
