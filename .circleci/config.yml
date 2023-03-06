@@ -20,27 +20,17 @@ jobs:
     parallelism: 1
     docker:
       - image: cimg/ruby:3.2.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD
       - image: circleci/postgres
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD
-        environment: # add POSTGRES environment variables.
-          POSTGRES_USER: circleci-demo-ruby
-          POSTGRES_DB: rails_blog_test
-          POSTGRES_PASSWORD: ""
+        environment:
+          POSTGRES_USER: mind
+          POSTGRES_HOST_AUTH_METHOD: trust
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
-      PGHOST: 127.0.0.1
-      PGUSER: circleci
-      PGPASSWORD: ""
+      DB_HOST: 127.0.0.1
+      DB_USER: mind
       RAILS_ENV: test
-      DATABASE_USERNAME: circleci
-      DATABASE_PASSWORD: ""
-      DATABASE_TEST_NAME: teams_challenge_test
+      RACK_ENV: test
       DATABASE_HOST: 127.0.0.1
     steps:
       - checkout
