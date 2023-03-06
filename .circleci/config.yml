@@ -50,15 +50,9 @@ jobs:
       - run:
           name: Run tests
           command: |
-            mkdir -p test-results/rspec test-artifacts
-            TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-            bundle exec rspec --profile 10 \
-                              --color \
-                              --order random \
-                              --format RspecJunitFormatter \
-                              --out test-results/rspec/rspec.xml \
-                              --format progress \
-                              -- ${TESTFILES}
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            bundle exec rspec --format progress $TEST_FILES
       - run:
           name: Code Climate Test Coverage
           command: |
