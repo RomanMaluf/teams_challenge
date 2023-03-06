@@ -23,7 +23,7 @@ RSpec.describe 'users/show', type: :view do
     render
 
     cell_selector = 'tr>td'
-    excepted_attributes = %w[id created_at updated_at remember_created_at encrypted_password]
+    excepted_attributes = %w[id created_at updated_at remember_created_at encrypted_password api_key]
 
     user.attributes.except(*excepted_attributes).each do |k, v|
       assert_select 'label[for=?]', "user_#{k}", count: 1

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Profile < ApplicationRecord
+  include Swagger::ProfileSchema
+
   has_and_belongs_to_many :permissions
   has_many :roles
 

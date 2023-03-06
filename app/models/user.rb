@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  include Swagger::UserSchema
   devise :database_authenticatable, :rememberable, :validatable
 
   has_many :roles,
@@ -17,7 +18,7 @@ class User < ApplicationRecord
   has_many :team_users
   has_many :teams, through: :team_users
 
-  has_many :customer_account, through: :teams
+  has_many :customer_accounts, through: :teams
 
   scope :not_admins, -> {
     joins(:profiles).where.not(profiles: {name: ['SuperAdmin', 'Admin']})
@@ -47,5 +48,11 @@ class User < ApplicationRecord
 
   def active_accounts
     team_users.active
+  end
+
+  private
+
+  def generate_api_key
+    api_key = SecureRandom.urlsafe_base64
   end
 end

@@ -64,3 +64,5 @@ group :test do
   gem 'ffaker'
   gem 'shoulda-matchers'
 end
+
+gem "rack-cors", "~> 2.0"

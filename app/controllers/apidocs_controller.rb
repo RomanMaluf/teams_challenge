@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 class ApidocsController < ApplicationController
   include Swagger::Blocks
   skip_before_action :authenticate_user!
-
 
   swagger_root do
     key :swagger, '2.0'
@@ -18,26 +19,32 @@ class ApidocsController < ApplicationController
         key :name, 'https://github.com/romanmaluf'
       end
     end
-    key :basePath, '/'
+    key :basePath, '/api/v1/'
     key :consumes, ['application/json']
     key :produces, ['application/json']
     tag name: 'User' do
       key :description, 'Users'
     end
+    tag name: 'CustomerAccount' do
+      key :description, 'Customer Accounts'
+    end
+    tag name: 'Profile' do
+      key :description, 'Profile'
+    end
   end
 
   # A list of all classes that have swagger_* declarations.
   SWAGGERED_CLASSES = [
-      User,
-      UsersController,
-      self,
+    User,
+    Api::V1::UsersController,
+    CustomerAccount,
+    Api::V1::CustomerAccountsController,
+    Profile,
+    Api::V1::ProfilesController,
+    self
   ].freeze
 
   def index
-=begin
-    swagger_data = Swagger::Blocks.build_root_json(SWAGGERED_CLASSES)
-    File.open(File.join(Rails.root, 'lib', 'swagger', 'swagger_v1.json'), 'w') { |file| file.write(swagger_data.to_json) }
-=end
     render json: Swagger::Blocks.build_root_json(SWAGGERED_CLASSES)
   end
 end
