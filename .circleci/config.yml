@@ -61,7 +61,7 @@ jobs:
       - run:
           name: Upload Code Climate Test Coverage
           command: |
-            ./cc-test-reporter sum-coverage --output - tmp/codeclimate.*.json | ./cc-test-reporter upload-coverage --debug --input -
+            ./cc-test-reporter sum-coverage --output - tmp/codeclimate.json | ./cc-test-reporter upload-coverage --debug --input -
 # We use workflows to orchestrate the jobs that we declared above.
 workflows:
   version: 2
