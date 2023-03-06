@@ -4,7 +4,7 @@ class CustomerAccountPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.admin? || user.roles_name.include?('Admin')
+      if user.admin? || user.can_perform?('list', 'CustomerAccount')
         scope.all
       else
         scope.none

@@ -16,7 +16,13 @@ FactoryBot.define do
     trait :common_user do
       profile { Profile.find_by_name('User') || association(:profile, :common_user) }
     end
+    trait :with_specific_role do
+      transient do
+        specific_role { 'User Show' }
+      end
+      before(:create) do |role, evaluator|
+        role.profile = FactoryBot.create(:profile, :with_specific_role, specific_role: evaluator.specific_role)
+      end
+    end
   end
 end
-
-

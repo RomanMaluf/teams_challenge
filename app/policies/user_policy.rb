@@ -32,7 +32,7 @@ class UserPolicy < ApplicationPolicy
       case user.roles_name
       when 'SuperAdmin', 'SuperAdmin-Admin'
         User.all
-      when 'Admin'
+      when 'Admin' || user.can_perform?('list', 'User')
         User.not_admins.or(User.where(id: user.id)) # hide other admin user for admin
       else
         User.where(id: user.id) # Only User context profile

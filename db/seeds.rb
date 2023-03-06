@@ -7,7 +7,8 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-n = ENV['USERS_COUNT'].to_i || 50
+n = ENV['USERS_COUNT'] || 50
+n = n.to_i
 
 admin_password = ENV['ADMIN_PASSWORD'] || '123123'
 
