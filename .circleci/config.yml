@@ -20,12 +20,15 @@ jobs:
         environment:
           POSTGRES_USER: mind
           POSTGRES_HOST_AUTH_METHOD: trust
+    working_directory: ~/repo
     environment:
+      CC_TEST_REPORTER_ID: d9958ab7ce689cf0e2f95c27502e0a3a1f5b993d66006c0e0e67d14dbb1ee50c
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
       DB_HOST: 127.0.0.1
       DB_USER: mind
       DATABASE_HOST: 127.0.0.1
+      RUN_COVERAGE: true
     steps:
       - checkout
       - ruby/install-deps
@@ -34,15 +37,33 @@ jobs:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           name: Database setup
-          command: bundle exec rails db:create && bundle exec rails db:migrate && bundle exec rails db:prepare 
+          command: bundle exec rails db:create && bundle exec rails db:migrate && bundle exec rails db:prepare
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+          # download test reporter as a static binary
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run:
+          name: Code Climate before-build
+          command: |
+            ./cc-test-reporter before-build
       - run:
           name: Run tests
           command: |
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-
-            bundle exec rspec --format progress $TEST_FILES
-
+            mkdir -p test-results/rspec test-artifacts
+            TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+            bundle exec rspec --profile 10 \
+                              --color \
+                              --order random \
+                              --format RspecJunitFormatter \
+                              --out test-results/rspec/rspec.xml \
+                              --format progress \
+                              -- ${TESTFILES}
+      - run:
+          name: Code Climate Test Coverage
+          command: |
+            ./cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.$CIRCLE_NODE_INDEX.json"
 # We use workflows to orchestrate the jobs that we declared above.
 workflows:
   version: 2
