@@ -1,6 +1,12 @@
 # README
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/1febadae2b4eba346abb/maintainability)](https://codeclimate.com/github/RomanMaluf/teams_challenge/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/1febadae2b4eba346abb/test_coverage)](https://codeclimate.com/github/RomanMaluf/teams_challenge/test_coverage)
+
 This is a `Rails` project bootstrapped with `rails new teams_challenge -d postgresql -T`
+
+Deployed at https://teams-challenge.onrender.com/
+
+Access: email: admin@arkusnexus.com , password: arkusnexus
 
 ## GETTING STARTED
 -----
