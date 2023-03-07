@@ -4,28 +4,39 @@ module Api
   module V1
     class BaseController < ActionController::API
       include Pundit::Authorization
+      after_action :verify_authorized, if: :current_user
+
+      before_action :authenticate_user_with_api_key!
+      before_action :require_current_user
+      # Order is important because we need current_user before Resource Methods.
+      include Api::V1::Resource
 
       rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
       rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
-      before_action :authenticate_user_with_api_key!
-      before_action :require_current_user
-
-      def policy_scope(scope)
-        Pundit.policy_scope(current_user, scope)
-      end
+      protected
 
       def authenticate_user_with_api_key!
-        raise ActiveRecord::RecordNotFound, 'Invalid API-KEY' unless request.headers[:HTTP_API_KEY].present?
+        api_key = request.headers[:HTTP_API_KEY] || params[:api_key]
+        raise ActiveRecord::RecordNotFound, 'Invalid API-KEY' unless api_key
 
-        user = User.find_by_api_key(request.headers[:HTTP_API_KEY])
-
+        user = User.find_by_api_key(api_key)
         raise ActiveRecord::RecordNotFound, 'Invalid API-KEY' unless user
 
         sign_in user
       end
 
-      private
+      def model_class
+        raise NotImplementedError, "You must define #model_class in #{self.class}"
+      end
+
+      def resource_includes
+        raise NotImplementedError, "You must define #resource_includes in #{self.class}"
+      end
+
+      def permitted_resource_params
+        raise NotImplementedError, "You must define #permitted_resource_params in #{self.class}"
+      end
 
       def require_current_user
         raise Pundit::NotAuthorizedError, 'Must be logged in' if current_user.nil?
