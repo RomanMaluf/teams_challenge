@@ -44,54 +44,15 @@ module Swagger
             key :type, :object
             property :customer_accounts do
               key :type, :object
-              property :data do
-                key :type, :array
-                items do
-                  key :type, :object
-                  property :id do
-                    key :type, :integer
-                    key :format, :int64
-                  end
-                  property :type do
-                    key :type, :string
-                  end
-                end
-              end
+              data_object
             end
             property :team_users do
               key :type, :object
-              property :data do
-                key :type, :array
-                items do
-                  key :type, :object
-                  property :id do
-                    key :type, :integer
-                    key :format, :int64
-                  end
-                  property :type do
-                    key :type, :string
-                  end
-                end
-              end
+              data_object
             end
           end
         end
-        property :included do
-          key :type, :array
-          items do
-            key :type, :object
-            property :id do
-              key :type, :integer
-              key :format, :int64
-            end
-            property :type do
-              key :type, :string
-            end
-            property :attributes do
-              key :type, :object
-            end
-          end
-        end
+        data_object(main_prop: :included, with_attr: true)
       end
 
       swagger_schema :UserInput do
@@ -119,6 +80,27 @@ module Swagger
           property :password_confirmation do
             key :type, :string
           end
+        end
+      end
+    end
+  end
+end
+
+def data_object(main_prop: :data, data_type: :array, with_attr: false)
+  property main_prop do
+    key :type, data_type
+    items do
+      key :type, :object
+      property :id do
+        key :type, :integer
+        key :format, :int64
+      end
+      property :type do
+        key :type, :string
+      end
+      if with_attr
+        property :attributes do
+          key :type, :object
         end
       end
     end
